@@ -11,10 +11,12 @@ double* Q() {
 	s.col=4;
 	int i =0;
 	while (s.ligne!=8 || s.col!=15 && i<100) {
-		int tab[2]; "on y mettra l'action voulue et la case s' choisie ainsi"
+		int tab[3]; "on y mettra l'action voulue et la case s' choisie ainsi"
 		tab[1]=0;
 		tab[2]=0;
-		"tab=eg(s)"
+		tab[3]=0;
+		"tab=eg(s.ligne,s.col)"
+		Q[tab[1],tab[2],
 		
 	}
     }
