@@ -7,7 +7,7 @@ double* Q() {
 				}
 			}
 		}
-	s.ligne=8;
+	s.ligne=8; "on voulait faire un header pour ca"
 	s.col=4;
 	int i =0;
 	while (s.ligne!=8 || s.col!=15 && i<100) {
