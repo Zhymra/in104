@@ -1,9 +1,9 @@
 #include "mazeEnv.h"
 #include "functions.h"
 
-"placeholders - à compléter"
+/*	/!\ placeholders - à compléter /!\	*/
 double alpha = 0.5;
-double gamma =1;
+double gamma_temp =1;
 
 double max_Q(double*** Q, int ligne, int colonne){
 	double max=-100;
@@ -29,7 +29,7 @@ double* Q() {
 	int ancienne_ligne;
 	int ancienne_col;
 	action prochaine_action;
-	envoutput nouvel_etat;
+	envOutput nouvel_etat;
 	int i =0;
 	while (nouvel_etat.done!=1 && i<100) {
 		"placeholder - à compléter"
@@ -46,7 +46,7 @@ double* Q() {
 		etat_col=nouvel_etat.new_col;
 
 		/* on update Q */
-		Q[ancienne_ligne,ancienne_col,prochaine_action] = Q[ancienne_ligne,ancienne_col,prochaine_action] + alpha*(nouvel_etat.reward + gamma*max_Q(Q,etat_ligne,etat_col) - Q[ancienne_ligne,ancienne_col,prochaine_action])
+		Q[ancienne_ligne,ancienne_col,prochaine_action] = Q[ancienne_ligne,ancienne_col,prochaine_action] + alpha*(nouvel_etat.reward + gamma_temp*max_Q(Q,etat_ligne,etat_col) - Q[ancienne_ligne,ancienne_col,prochaine_action])
 		
 	}
     }
