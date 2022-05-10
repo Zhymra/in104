@@ -31,7 +31,7 @@ double* Q() {
 	action prochaine_action;
 	envOutput nouvel_etat;
 	int i =0;
-	while (nouvel_etat.done!=1 && i<1000) {
+	while (nouvel_etat.done!=1 && i<100) {
 		/* /!\  	placeholder - à compléter	  /!\ */
 		prochaine_action = left;
 		/* prochaine_action=epsilon_greedy(etat_ligne,etat_col,Q); */
@@ -47,7 +47,8 @@ double* Q() {
 
 		/* on update Q */
 		Q[ancienne_ligne][ancienne_col][prochaine_action] = Q[ancienne_ligne][ancienne_col][prochaine_action] + alpha*(nouvel_etat.reward + gamma_temp*max_Q(Q,etat_ligne,etat_col) - Q[ancienne_ligne][ancienne_col][prochaine_action]);
-		
+		i=i+1;
+	
 	}
 	if (nouvel_etat.done==1) {
 		printf("%d Tu es magnifique",i);
