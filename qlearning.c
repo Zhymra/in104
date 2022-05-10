@@ -38,7 +38,7 @@ action epsi_greed(double Q[][cols][4], int ligne, int colonne){
                                    
     
 
-double* Q() {
+void Q() {
 	double Q[rows][cols][4];
 		for (int i=0;i<rows;++i) {
 			for (int j=0;j<cols;++j) {
