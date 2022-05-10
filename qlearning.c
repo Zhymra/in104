@@ -4,6 +4,7 @@
 /*	/!\ placeholders - à compléter /!\	*/
 double alpha = 0.5;
 double gamma_temp =1;
+double epsilon=0.15;
 
 double max_Q(double Q[][cols][4], int ligne, int colonne){
 	double max=-100;
@@ -14,6 +15,28 @@ double max_Q(double Q[][cols][4], int ligne, int colonne){
 	}
 	return (max);
 }
+
+action epsi_greed(double Q[][cols][4], int ligne, int colonne){
+  double ran_nb = rand()/RAND_MAX;
+  enum action action_choisie;
+  if (ran_nb<epsilon) {
+    action_choisie = rand()%4;
+  } 
+  else {
+    double max=-100;
+    int ind_max = 0;
+	  for (int i=0;i<4;++i){
+		  if (Q[ligne][colonne][i]>max){
+			  max = Q[ligne][colonne][i];
+        ind_max = i;
+	 	  }
+	  }
+  action_choisie = ind_max;
+  } 
+  return(action_choisie);
+}
+                                   
+    
 
 double* Q() {
 	double Q[rows][cols][4];
@@ -31,10 +54,10 @@ double* Q() {
 	action prochaine_action;
 	envOutput nouvel_etat;
 	int i =0;
-	while (nouvel_etat.done!=1 && i<100) {
-		/* /!\  	placeholder - à compléter	  /!\ */
-		prochaine_action = left;
-		/* prochaine_action=epsilon_greedy(etat_ligne,etat_col,Q); */
+	while (nouvel_etat.done!=1 && i<200) {
+		
+		
+		prochaine_action=epsi_greed(Q,etat_ligne,etat_col); 
 		nouvel_etat = maze_step(prochaine_action);
 		
 		/* on update les anciennes valeurs */
