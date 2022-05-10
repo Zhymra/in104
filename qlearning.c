@@ -32,7 +32,7 @@ double* Q() {
 	envOutput nouvel_etat;
 	int i =0;
 	while (nouvel_etat.done!=1 && i<100) {
-		"placeholder - à compléter"
+		/* /!\  	placeholder - à compléter	  /!\ */
 		prochaine_action = left;
 		/* prochaine_action=epsilon_greedy(etat_ligne,etat_col,Q); */
 		nouvel_etat = maze_step(prochaine_action);
