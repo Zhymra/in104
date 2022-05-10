@@ -49,5 +49,10 @@ double* Q() {
 		Q[ancienne_ligne][ancienne_col][prochaine_action] = Q[ancienne_ligne][ancienne_col][prochaine_action] + alpha*(nouvel_etat.reward + gamma_temp*max_Q(Q,etat_ligne,etat_col) - Q[ancienne_ligne][ancienne_col][prochaine_action]);
 		
 	}
-	
+	if (nouvel_etat.done==1) {
+		printf("%d Tu es magnifique",i);
+	}
+	else {
+		printf("Tu es une merde");
+	}
     }
