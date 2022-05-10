@@ -1,1 +1,1 @@
-état actuel : point mort
+état actuel : on avance à petits pas
