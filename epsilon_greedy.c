@@ -2,9 +2,9 @@
 #include "functions.h"
 
 action epsi_greed(double epsilon, int ligne, int colonne, double Q[][cols][4]){
-  double ran_nb = rand(2000)/(2000-1); /* placeholders: double entre 0 et 1 randomized */;
+  double ran_nb = rand()/RAND_MAX; /* placeholders: double entre 0 et 1 randomized */;
   if (ran_nb<epsilon) {
-    action action_choisie = action(rand(3));
+    action action_choisie = action(rand()%4);
   } 
   else {
     double max=-100;
