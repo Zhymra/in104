@@ -39,44 +39,49 @@ action epsi_greed(double Q[][cols][4], int ligne, int colonne){
     
 
 void Q() {
-	double Q[rows][cols][4];
-		for (int i=0;i<rows;++i) {
-			for (int j=0;j<cols;++j) {
-				for (int k=0;k<4;++k) {
-					Q[i][j][k]=0;
+	
+		double Q[rows][cols][4];
+			for (int i=0;i<rows;++i) {
+				for (int j=0;j<cols;++j) {
+					for (int k=0;k<4;++k) {
+						Q[i][j][k]=0;
+					}
 				}
 			}
-		}
-	int etat_ligne=start_row;
-	int etat_col=start_col;
-	int ancienne_ligne;
-	int ancienne_col;
-	action prochaine_action;
-	envOutput nouvel_etat;
-	int i =0;
-	while (nouvel_etat.done!=1 && i<200) {
 		
+		int etat_ligne=start_row;
+		int etat_col=start_col;
+		int ancienne_ligne;
+		int ancienne_col;
+		action prochaine_action;
+		envOutput nouvel_etat;
 		
-		prochaine_action=epsi_greed(Q,etat_ligne,etat_col); 
-		nouvel_etat = maze_step(prochaine_action);
-		
-		/* on update les anciennes valeurs */
-		ancienne_ligne=etat_ligne;
-		ancienne_col=etat_col;
-		
-		/* on update les nouvelles valeurs */
-		etat_ligne=nouvel_etat.new_row;
-		etat_col=nouvel_etat.new_col;
+	for (int u=0;u<5;++u) { /*ca core dump des qu'on depasse 2 ou 3 */
+		int i =0;
+		nouvel_etat.done=0;
+		while (nouvel_etat.done!=1 && i<100) {
+			
+			
+			prochaine_action=epsi_greed(Q,etat_ligne,etat_col); 
+			nouvel_etat = maze_step(prochaine_action);
+			
+			/* on update les anciennes valeurs */
+			ancienne_ligne=etat_ligne;
+			ancienne_col=etat_col;
+			
+			/* on update les nouvelles valeurs */
+			etat_ligne=nouvel_etat.new_row;
+			etat_col=nouvel_etat.new_col;
 
-		/* on update Q */
-		Q[ancienne_ligne][ancienne_col][prochaine_action] = Q[ancienne_ligne][ancienne_col][prochaine_action] + alpha*(nouvel_etat.reward + gamma_temp*max_Q(Q,etat_ligne,etat_col) - Q[ancienne_ligne][ancienne_col][prochaine_action]);
-		i=i+1;
-	
-	}
-	if (nouvel_etat.done==1) {
-		printf("%d Tu es magnifique",i);
-	}
-	else {
-		printf("Tu es une merde");
+			/* on update Q */
+			Q[ancienne_ligne][ancienne_col][prochaine_action] = Q[ancienne_ligne][ancienne_col][prochaine_action] + alpha*(nouvel_etat.reward + gamma_temp*max_Q(Q,etat_ligne,etat_col) - Q[ancienne_ligne][ancienne_col][prochaine_action]);
+			i=i+1;
+		}
+		if (nouvel_etat.done==1) {
+			printf("%d Tu es magnifique",i);
+		}
+		else {
+			printf("Tu es une merde");
+		}
 	}
     }
