@@ -1,5 +1,5 @@
-#ifndef QLEARNING_H
-#define QLEARNING_H
+#ifndef SARSA_H
+#define SARSA_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,4 +10,4 @@ double max_Q();
 
 action epsi_greed();
 
-#endif /* QLEARNING_H */
+#endif /* SARSA_H */

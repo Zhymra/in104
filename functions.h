@@ -5,6 +5,8 @@
 
 extern int min(int a, int b);
 
+extern double maxd(double a, double b);
+
 extern int max(int a, int b);
 
 #endif

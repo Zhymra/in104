@@ -39,7 +39,6 @@ void maze_make(char* file_name){
      /* convertir le string en nombre */
      rows = atoi(rows_s);
      cols = atoi(cols_s);
-
      alloc_maze();
 
      for (int i=0; i<rows; i++){
@@ -84,26 +83,39 @@ envOutput maze_step(action a){
     int reward = 0;
     int done = 0;
     envOutput stepOut;
+    stepOut.new_col = state_col;
+    stepOut.new_row = state_row; 
+    int test_state_row=state_row;
+    int test_state_col=state_col;
+
 
     if (a==up){
-       state_row = max(0,state_row -1);
+       test_state_row = max(0,state_row -1);
     }else if (a==down){
-       state_row = min(rows,state_row +1);
+       test_state_row = min(rows-1,state_row +1);
     }else if (a==right){
-       state_col = min(cols,state_col +1);
+       test_state_col = min(cols-1,state_col +1);
     }else if (a==left){
-       state_col = max(0,state_col -1);
+       test_state_col = max(0,state_col -1);
     }
-    
+
+    if (maze[test_state_row][test_state_col]!='+') {
+        state_row=test_state_row;
+        state_col=test_state_col;
+        stepOut.new_col = test_state_col;
+        stepOut.new_row = test_state_row; 
+    }
+     if (maze[state_row][state_col]=='+') {
+        printf("mur  \n");
+    }
     if((state_row == goal_row) && (state_col == goal_col)){
        reward = 1;
        done   = 1;
     }
 
+
     stepOut.reward = reward;
     stepOut.done   = done;
-    stepOut.new_col = state_col;
-    stepOut.new_row = state_row; 
 
    return stepOut;
 }

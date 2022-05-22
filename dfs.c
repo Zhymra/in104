@@ -1,5 +1,5 @@
 #include "mazeEnv.h"
-#include "qlearning.h"
+#include "qlearningmur.h"
 
 
 int dfs(int row, int col){
@@ -50,6 +50,10 @@ int main(){
    dfs(start_row,start_col);
    add_crumbs();
    maze_render();
-   Q();
+   tableau();
+   free(Q);
+   free(maze);
+   free(visited);
    return 0;
 }
+
