@@ -1,0 +1,1 @@
+état actuel : point mort
