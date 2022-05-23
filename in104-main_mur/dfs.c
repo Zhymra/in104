@@ -50,7 +50,11 @@ int main(){
    dfs(start_row,start_col);
    add_crumbs();
    maze_render();
+    
+   /*On lance la fonction qui renverra notre table de Q dans le terminal*/ 
    tableau();
+    
+   /*on free tous les tableaux utilisés*/ 
    free(Q);
    free(maze);
    free(visited);
