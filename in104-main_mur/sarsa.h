@@ -4,10 +4,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void Q();
+double*** Q;
+
+
+void init_Q();
+
+void tableau();
 
 double max_Q();
 
 action epsi_greed();
+
 
 #endif /* SARSA_H */
