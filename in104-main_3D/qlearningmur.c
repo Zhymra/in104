@@ -74,29 +74,6 @@ double max_Q(int ligne, int colonne, int etage){
 	return (max);
 }
 
-/*
-int test_step(action a,double*** Q){
-    int test_state_row=state_row;
-    int test_state_col=state_col;
-
-    if (a==up){
-       test_state_row = max(0,state_row -1);
-    }else if (a==down){
-       test_state_row = min(rows-1,state_row +1);
-    }else if (a==right){
-       test_state_col = min(cols-1,state_col +1);
-    }else if (a==left){
-       test_state_col = max(0,state_col -1);
-    }
-
-    if (maze[test_state_row][test_state_col]=='+') {
-    	Q[test_state_col][test_state_row][a]=-500;
-
-    	return 0;
-    }
-    return 1;
-
-}*/
 
 
 envOutput maze_step_mur(action a){
@@ -250,10 +227,10 @@ void tableau() {
 			ancien_etage=etage(ancienne_ligne);
 			ancienne_ligne=state_row_true(ancienne_ligne);
 
-			Q[ancienne_ligne][ancienne_col][state_etage][prochaine_action] = 
-			Q[ancienne_ligne][ancienne_col][state_etage][prochaine_action] +
+			Q[ancienne_ligne][ancienne_col][ancien_etage][prochaine_action] = 
+			Q[ancienne_ligne][ancienne_col][ancien_etage][prochaine_action] +
 			alpha*(nouvel_etat.reward + gamma_temp*max_Q(state_row_true(state_row),state_col, etage(state_row)) - 
-			Q[ancienne_ligne][ancienne_col][state_etage][prochaine_action]);
+			Q[ancienne_ligne][ancienne_col][ancien_etage][prochaine_action]);
 			i=i+1;
 
 			/*if (state_row!=state_row_true(state_row)+etage(state_row)*12) {
