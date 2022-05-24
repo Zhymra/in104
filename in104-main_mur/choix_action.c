@@ -1,3 +1,4 @@
+#include "dfs.h"
 #include <math.h>
 #include <time.h>
 #include <stdio.h>
@@ -64,4 +65,3 @@ action Bolt(){
   }
   return(action_choisie);
 }
-  
