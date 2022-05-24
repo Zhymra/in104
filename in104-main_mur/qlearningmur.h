@@ -1,3 +1,4 @@
+
 #ifndef QLEARNINGMUR_H
 #define QLEARNINGMUR_H
 
@@ -5,9 +6,6 @@
 #include <stdlib.h>
 
 double*** Q;
-double alpha;
-double gamma_temp;
-double epsilon;
 
 void init_Q();
 
