@@ -44,7 +44,7 @@ void add_crumbs(){
 int main(){
    printf("Veuillez rentrer les valeurs des doubles suivants : alpha,gamma,epsilon\n");
    scanf("%lf,%lf,%lf",&alpha,&gamma_temp,&epsilon);
-   printf("Choisissez le type d'algorithme : 0 pour Qlearning, 1 pour Sarca\n");
+   printf("Choisissez le type d'algorithme : 0 pour Qlearning, 1 pour Sarsa\n");
    scanf("%d",&type_algo);
    printf("Choisissez l'algorithme de choix : 0 pour Epsilon-greedy, 1 pour Boltzmann-exploration\n");
    scanf("%d",&type_choix); 
