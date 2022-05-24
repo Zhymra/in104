@@ -1,6 +1,6 @@
 Ceci est le ReadMe détaillant le dossier in104-main_mur.
 
-Pour compiler le code, il faut écrire la commande " gcc -Wall -Werror -Wfatal-errors dfs.c functions.c mazeEnv.c qlearningmur.c choix_action.c -lm "
+Pour compiler le code, il faut écrire la commande " gcc -Wall -Werror -Wfatal-errors dfs.c functions.c mazeEnv.c qlearningmur.c choix_action.c -lm ",- ou utiliser le makefile.
 
 Tout d'abord, la raison pour laquelle ce fichier s'appelle ainsi est parce que nous avons recodé maze_step en maze_step_mur. En effet, nous avons rencontré des problèmes (core dumped notamment) qui après une longue examination se sont révélés issus d'une tentative d'accès a des cases hors limites du labyrinthe. De plus, notre algorithme passait à travers les murs (et atteignait ainsi l'arrivée en un record de 11 coups), ce qui limite évidemment l'intérêt de ce projet. Nous avons donc éliminé ces erreurs avec la fonction maze_step_mur, placée dans mazeEnv.c . C'est, dans le cas 2D et donc dans ce dossier, la seule modification majeure apportée à mazeEnv.c .
 
