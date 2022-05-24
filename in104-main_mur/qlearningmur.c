@@ -111,16 +111,20 @@ void tableau() {
                     /*sur le dernier essai on n'admet plus de hasard et on prend le meilleur chemin selon le tableau Q*/
                     else {
                         epsilon=0;
+                           
+                        /* on place les points sur le labyrinthe */
+                        if (i!=0){
+                        	maze[state_row][state_col]='.';
+                        } 
+                           
                         printf("%d , %d et ensuite l'action : ", state_row, state_col);
                         
                         ancienne_ligne=state_row;
                         ancienne_col=state_col;
                         prochaine_action=epsi_greed(); 
+                           
                         printf("%d qui donne : ", prochaine_action);
-                    
                         nouvel_etat = maze_step_mur(prochaine_action);
-
-
                         printf("%d , %d\n", state_row, state_col);
 
                         Q[ancienne_ligne][ancienne_col][prochaine_action] = Q[ancienne_ligne][ancienne_col][prochaine_action] +
@@ -168,9 +172,16 @@ void tableau() {
                     }
                     else {
                         epsilon=0;
+                           
+                        /* on place les points sur le labyrinthe */
+                        if (i!=0){
+                        	maze[state_row][state_col]='.';
+                        }
+                        
                         printf("on était en %d , %d et on passe en ", state_row, state_col);
                         ancienne_ligne=state_row;
-                        ancienne_col=state_col;     
+                        ancienne_col=state_col; 
+                        
                         nouvel_etat = maze_step_mur(prochaine_action);
                         printf("%d , %d\n", state_row, state_col);
                         ancienne_action=prochaine_action;
