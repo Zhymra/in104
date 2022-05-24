@@ -79,8 +79,9 @@ void maze_reset(){
      state_col = start_col;
 }
 
-envOutput maze_step(action a){
-    int reward = 0;
+/*Un maze_step qui interdit l'accès aux murs*/
+envOutput maze_step_mur(action a){
+    int reward = -1;
     int done = 0;
     envOutput stepOut;
     stepOut.new_col = state_col;
@@ -105,11 +106,9 @@ envOutput maze_step(action a){
         stepOut.new_col = test_state_col;
         stepOut.new_row = test_state_row; 
     }
-     if (maze[state_row][state_col]=='+') {
-        printf("mur  \n");
-    }
+
     if((state_row == goal_row) && (state_col == goal_col)){
-       reward = 1;
+       reward = 5;
        done   = 1;
     }
 
@@ -119,6 +118,7 @@ envOutput maze_step(action a){
 
    return stepOut;
 }
+
 
 action env_action_sample(){
   return (enum action)(rand() % number_actions);

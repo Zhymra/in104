@@ -51,7 +51,7 @@ void maze_render();
 
 void maze_reset();
 
-envOutput maze_step(action a); 
+envOutput maze_step_mur(action a); 
 
 action env_action_sample();
 
