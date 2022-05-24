@@ -20,7 +20,7 @@ void maze_make(char* file_name){
      FILE* file = fopen(file_name, "r");
 
      if (file) {
-         /* lire la premiere ligne avant EOF */
+  
          while( (c=getc(file)) != EOF) {
                if(c== '\n'){
                       break;
@@ -35,10 +35,7 @@ void maze_make(char* file_name){
                }
          }
      }
-     /*
-     rows = atoi(rows_s);
-     cols = atoi(cols_s);
-     */
+  
      alloc_maze();
 
      for (int i=0; i<rows*etages; i++){
@@ -47,13 +44,7 @@ void maze_make(char* file_name){
              
              if (c=='\n'){
                  c = getc(file);
-             } /*else if (c == 's'){
-               start_row = i;
-               start_col = j;
-             } else if ( c == 'g'){
-               goal_row = i;
-               goal_col = j;
-             }*/
+             }
             
              maze[i][j] = c;
          }
@@ -79,68 +70,8 @@ void maze_reset(){
      state_col = start_col;
      state_etage=start_etage;
 }
-/*
-envOutput maze_step(action a){
-    int reward = 0;
-    int done = 0;
-    envOutput stepOut;
-
-    if (a==up){
-       state_row = max(0,state_row -1);
-    }else if (a==down){
-       state_row = min(rows-1,state_row +1);
-    }else if (a==right){
-       state_col = min(cols-1,state_col +1);
-    }else if (a==left){
-       state_col = max(0,state_col -1);
-    }
-    
-    if((state_row == goal_row) && (state_col == goal_col)){
-       reward = 1;
-       done   = 1;
-    }
-    if (maze[state_row][state_col]=='+') {
-       reward = -100;
-    }
-
-    stepOut.reward = reward;
-    stepOut.done   = done;
-    stepOut.new_col = state_col;
-    stepOut.new_row = state_row; 
-
-   return stepOut;
-}*/
 
 action env_action_sample(){
   return (enum action)(rand() % 6);
 }
 
-/*void alloc_visited()
-{
-        visited = malloc(rows * sizeof(int*));
-        int i;
-        for (i = 0; i < rows; ++i){
-                visited[i] = malloc(cols * sizeof(int*));
-        }
-}
-
-
-void init_visited()
-{
-        alloc_visited();
-
-        int i, j;
-        for (i = 0; i < rows; ++i) {
-                for (j = 0; j < cols; ++j) {
-                        if (maze[i][j] == '+') {
-                                visited[i][j] = wall;
-                        } else if (maze[i][j] == 'g') {
-                                visited[i][j] = goal;
-                        } else {
-                                visited[i][j] = unknown;
-                        }
-                }
-        }
-}
-
-*/

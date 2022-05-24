@@ -9,7 +9,7 @@
 /*	/!\ placeholders - à compléter /!\	*/
 double alpha = 0.1;
 double gamma_temp =1;
-double epsilon=0.1;
+double epsilon=0.4;
 
                  
 void init_Q() {
@@ -138,10 +138,8 @@ action epsi_greed(){
 			  
        		  ind_max = i;
 	 	  }
-	 	  //printf("\n");
 	  }
   action_choisie = ind_max;
-  //printf("random choisi si boucle : %d\n", action_choisie);
   } 
   return(action_choisie);
 }
@@ -164,113 +162,78 @@ void tableau() {
 		state_row=start_row;
 		state_col=start_col;
 		state_etage=start_etage;
-		//epsilon=mind(0.3,0.05+(500-w)/w);
-		while (nouvel_etat.done!=1 && i<10000) {
-			if (u >9999) {
-			printf("%d , %d , %d et ensuite l'action : ", state_row_true(state_row), state_col, etage(state_row));
-			
+
+		while (nouvel_etat.done!=1 && i<1000) {
+			if (u >9998) {
+				epsilon=0;
+				printf("%d , %d , %d et ensuite l'action : ", state_row_true(state_row), state_col, etage(state_row));
+				
 
 
-			ancienne_ligne=state_row;
-			ancienne_col=state_col;
-			ancien_etage=state_etage;
-			prochaine_action=epsi_greed(); 
-			printf("%d qui donne : ", prochaine_action);
-			
-			nouvel_etat = maze_step_mur(prochaine_action);
-			/* on update les anciennes valeurs */
-
-			
-			/* on update les nouvelles valeurs */
-
-			printf("%d , %d , %d\n", state_row_true(state_row), state_col, etage(state_row));
-
-			/* on update Q */
-			//printf("%f\n", Q[6][3][2][3] );
-			if (maze[ancienne_ligne][ancienne_col]=='+') {
-				printf("aie\n");
-			}
-			ancien_etage=etage(ancienne_ligne);
-			ancienne_ligne=state_row_true(ancienne_ligne);
-			//printf("%d\n", state_etage);
-			Q[ancienne_ligne][ancienne_col][state_etage][prochaine_action] = 
-			Q[ancienne_ligne][ancienne_col][state_etage][prochaine_action] +
-			alpha*(nouvel_etat.reward + gamma_temp*max_Q(state_row_true(state_row),state_col, etage(state_row)) - 
-			Q[ancienne_ligne][ancienne_col][state_etage][prochaine_action]);
-			i=i+1;
-			} else {
-			if (i==1000) {
-				epsilon=0.2;
-			}
-			if (i==2000) {
-				epsilon=0.4;
-			}
-			
-			ancienne_ligne=state_row;
-			ancienne_col=state_col;
-			ancien_etage=state_etage;
-			prochaine_action=epsi_greed(state_row_true(state_row),state_col,state_etage); 
+				ancienne_ligne=state_row;
+				ancienne_col=state_col;
+				ancien_etage=state_etage;
+				prochaine_action=epsi_greed(); 
+				printf("%d qui donne : ", prochaine_action);
+				
+				nouvel_etat = maze_step_mur(prochaine_action);
 		
-			nouvel_etat = maze_step_mur(prochaine_action);
-			/* on update les anciennes valeurs */
 
+				printf("%d , %d , %d\n", state_row_true(state_row), state_col, etage(state_row));
+
+
+				if (maze[ancienne_ligne][ancienne_col]=='+') {
+					printf("aie\n");
+				}
+				ancien_etage=etage(ancienne_ligne);
+				ancienne_ligne=state_row_true(ancienne_ligne);
+
+				Q[ancienne_ligne][ancienne_col][ancien_etage][prochaine_action] = 
+				Q[ancienne_ligne][ancienne_col][ancien_etage][prochaine_action] +
+				alpha*(nouvel_etat.reward + gamma_temp*max_Q(state_row_true(state_row),state_col, etage(state_row)) - 
+				Q[ancienne_ligne][ancienne_col][ancien_etage][prochaine_action]);
+				i=i+1;
+			} else {
+				if (i==1000) {
+					epsilon=0.2;
+				}
+				if (i==2000) {
+					epsilon=0.05;
+				}
+				
+				ancienne_ligne=state_row;
+				ancienne_col=state_col;
+				ancien_etage=state_etage;
+				prochaine_action=epsi_greed(state_row_true(state_row),state_col,state_etage); 
 			
-			/* on update les nouvelles valeurs */
+				nouvel_etat = maze_step_mur(prochaine_action);
 
 
-			/* on update Q */
-			if (maze[ancienne_ligne][ancienne_col]=='+') {
-				printf("aie\n");
-			}
+				/* on update Q */
+				if (maze[ancienne_ligne][ancienne_col]=='+') {
+					printf("aie\n");
+				}
 
 
-			ancien_etage=etage(ancienne_ligne);
-			ancienne_ligne=state_row_true(ancienne_ligne);
+				ancien_etage=etage(ancienne_ligne);
+				ancienne_ligne=state_row_true(ancienne_ligne);
 
-			Q[ancienne_ligne][ancienne_col][ancien_etage][prochaine_action] = 
-			Q[ancienne_ligne][ancienne_col][ancien_etage][prochaine_action] +
-			alpha*(nouvel_etat.reward + gamma_temp*max_Q(state_row_true(state_row),state_col, etage(state_row)) - 
-			Q[ancienne_ligne][ancienne_col][ancien_etage][prochaine_action]);
-			i=i+1;
+				Q[ancienne_ligne][ancienne_col][ancien_etage][prochaine_action] = 
+				Q[ancienne_ligne][ancienne_col][ancien_etage][prochaine_action] +
+				alpha*(nouvel_etat.reward + gamma_temp*max_Q(state_row_true(state_row),state_col, etage(state_row)) - 
+				Q[ancienne_ligne][ancienne_col][ancien_etage][prochaine_action]);
+				i=i+1;
 
-			/*if (state_row!=state_row_true(state_row)+etage(state_row)*12) {
-				printf("buuusted\n");
-			}*/
+
 
 			}
 		}
 		if (nouvel_etat.done==1) {
-			printf("Tu es magnifique %d \n",i);
+			printf("Sortie trouvée en %d coups\n",i);
 			w=w+1;
 		}
 		else {
-			printf("Tu es une merde\n");
+			printf("Sortie non trouvée\n");
 		}
 	}
-  /* print le tableau
-  for (int i = 0; i < rows + 1; i++)
-    {
-        for (int j = 0; j < cols + 1; j++)
-        {
-            for (int k = 0; k < 5; k++) {
-                printf("%f ", Q[i][j][k]);
-            }
-            printf("\n");
-        }
-        printf("\n");
-    }
-   */
-	  
-  for (int i = 0; i < rows + 1; i++)
-    {
-        for (int j = 0; j < cols + 1; j++)
-        {
-            for (int k = 0; k < etages + 1; k++)
-       		 {
-                printf("%f ", max_Q(i,j,k));
-           
-       		 }
-        printf("\n");
-    }	}
-   printf("%f %f %f %f %f %f\n", Q[6][3][0][3],Q[6][3][0][2],Q[6][3][0][1],Q[6][3][0][0],Q[6][3][0][4],Q[6][3][0][5]);
 }
