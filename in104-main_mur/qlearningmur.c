@@ -1,3 +1,4 @@
+#include "dfs.h"
 #include "mazeEnv.h"
 #include "functions.h"
 #include "qlearningmur.h"
@@ -73,14 +74,10 @@ void tableau() {
         srand(time(NULL));
         int i;
         /*initialisation des paramètres*/
-        alpha = 0.9;
-        gamma_temp =1;
-        epsilon=0.01;
         int nombre_essais=2000;
         int nombre_coups_max=1000;
-        int sarsa=1;
         /*on choisit si on utilise du sarsa ou du q learning*/
-        if (sarsa==0) {
+        if (type_algo==0) {
             for (int u=0;u<nombre_essais;++u) { 
                 /*a partir d'ici on relance une nouvelle exploration du labyrinthe*/
                 i = 0;
@@ -93,7 +90,12 @@ void tableau() {
 
                         ancienne_ligne=state_row;
                         ancienne_col=state_col;
-                        prochaine_action=epsi_greed(); 
+                        
+                        if (type_choix==0){
+                        	prochaine_action=epsi_greed();
+                        } else {
+                        	prochaine_action=Bolt(); 
+                        }
 
                         nouvel_etat = maze_step_mur(prochaine_action);
 
@@ -111,20 +113,20 @@ void tableau() {
                     /*sur le dernier essai on n'admet plus de hasard et on prend le meilleur chemin selon le tableau Q*/
                     else {
                         epsilon=0;
-                           
-                        /* on place les points sur le labyrinthe */
-                        if (i!=0){
-                        	maze[state_row][state_col]='.';
-                        } 
-                           
                         printf("%d , %d et ensuite l'action : ", state_row, state_col);
                         
                         ancienne_ligne=state_row;
                         ancienne_col=state_col;
+                        /* on place les points sur le labyrinthe */
+                        if (i!=0){
+                        	maze[state_row][state_col]='.';
+                        } 
                         prochaine_action=epsi_greed(); 
-                           
                         printf("%d qui donne : ", prochaine_action);
+                    
                         nouvel_etat = maze_step_mur(prochaine_action);
+
+
                         printf("%d , %d\n", state_row, state_col);
 
                         Q[ancienne_ligne][ancienne_col][prochaine_action] = Q[ancienne_ligne][ancienne_col][prochaine_action] +
@@ -160,7 +162,11 @@ void tableau() {
 
                         
                         ancienne_action=prochaine_action;
-                        prochaine_action=epsi_greed(); 
+                        if (type_choix==0){
+                        	prochaine_action=epsi_greed();
+                        } else {
+                        	prochaine_action=Bolt(); 
+                        }
 
 
                         /* on update Q via sarsa*/
@@ -172,16 +178,13 @@ void tableau() {
                     }
                     else {
                         epsilon=0;
-                           
+                        printf("on était en %d , %d et on passe en ", state_row, state_col);
+                        ancienne_ligne=state_row;
+                        ancienne_col=state_col;  
                         /* on place les points sur le labyrinthe */
                         if (i!=0){
                         	maze[state_row][state_col]='.';
-                        }
-                        
-                        printf("on était en %d , %d et on passe en ", state_row, state_col);
-                        ancienne_ligne=state_row;
-                        ancienne_col=state_col; 
-                        
+                        }   
                         nouvel_etat = maze_step_mur(prochaine_action);
                         printf("%d , %d\n", state_row, state_col);
                         ancienne_action=prochaine_action;
