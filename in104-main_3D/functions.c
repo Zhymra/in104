@@ -1,4 +1,5 @@
 #include "functions.h"
+#include "mazeEnv.h"
 
 double mind(double a, double b){
     return (a>b) ? b : a;
@@ -17,8 +18,8 @@ int max(int a, int b){
 }
 
 int state_row_true(int state_row_old) {
-    return(state_row_old%12);
+    return(state_row_old%rows);
 }
 int etage(int state_row_old) {
-    return(state_row_old/12);
+    return(state_row_old/rows);
 }

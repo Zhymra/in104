@@ -1,3 +1,4 @@
+
 #ifndef QLEARNINGMUR_H
 #define QLEARNINGMUR_H
 
@@ -6,13 +7,11 @@
 
 double**** Q;
 
-
 void init_Q();
 
 void tableau();
 
 double max_Q();
 
-action epsi_greed();
 
 #endif /* QLEARNINGMUR_H */

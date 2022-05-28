@@ -1,28 +1,27 @@
+#include "dfs.h"
 #include "mazeEnv.h"
 #include "qlearningmur.h"
 
-int main(){
-    etages=4;
-    rows=4*12;
-    cols=20;
-    start_row=6;
-    start_col=3;
-    start_etage=0;
-    goal_row=5;
-    goal_col=16;
-    goal_etage=3;
-   maze_make("maze.txt");
-   //init_visited();
-   maze_reset();
 
-   printf("%d, %d \n", rows, cols);
+int main(){
+   printf("Veuillez rentrer les valeurs des doubles suivants : alpha,gamma,epsilon\n");
+   scanf("%lf,%lf,%lf",&alpha,&gamma_temp,&epsilon);
+   printf("Choisissez le type d'algorithme : 0 pour Qlearning, 1 pour Sarsa\n");
+   scanf("%d",&type_algo);
+   printf("Choisissez l'algorithme de choix : 0 pour Epsilon-greedy, 1 pour Boltzmann-exploration\n");
+   scanf("%d",&type_choix); 
+   maze_make("maze.txt");
+
+   printf("%d, %d, %d \n", rows, cols, etages);
    printf("number of actions :  %d \n", number_actions); 
    maze_render();
-   //dfs(start_row,start_col);
-   //add_crumbs();
-   //maze_render();
    tableau();
+   maze_render();
+    //printf("%d , %d , %d, %d , %d , %d",start_row,start_col,start_etage,goal_row,goal_col,goal_etage);
 
+   free(Q);
+   free(maze);
    return 0;
 }
+
 

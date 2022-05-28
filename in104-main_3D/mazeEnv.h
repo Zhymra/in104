@@ -5,10 +5,9 @@
 #include <stdlib.h>
 
 char** maze;
-int** visited;
-int etages;
 int rows;
 int cols;
+int etages;
 int start_row;
 int start_col;
 int start_etage;
@@ -19,19 +18,11 @@ int goal_row;
 int goal_col;
 int goal_etage;
 
-enum terrain{
-    unknown,
-    wall,
-    known,
-    goal,
-    crumb
-};
-
 enum action{
      north,
      south,
-     east,
      west,
+     east,
      up,
      down,
      number_actions 
@@ -58,12 +49,8 @@ void maze_render();
 
 void maze_reset();
 
-envOutput maze_step(action a); 
+envOutput maze_step_mur(action a); 
 
 action env_action_sample();
-
-void alloc_visited();
-
-void init_visited();
 
 #endif /* MAZEENV_H */
