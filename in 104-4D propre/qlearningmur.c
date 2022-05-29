@@ -251,29 +251,4 @@ void tableau() {
         }
 
   }  
-  /* print le tableau
-  for (int i = 0; i < rows; i++)
-    {
-        for (int j = 0; j < cols; j++)
-        {
-            for (int k = 0; k < number_actions; k++) {
-                printf("%f ", Q[i][j][k]);
-            }
-            printf("\n");
-        }
-        printf("\n");
-    }
-   
-    //on print la valeur maximale de chaque case de Q
-  for (int i = 0; i < rows; i++)
-    {
-        for (int j = 0; j < cols; j++)
-        {
-           
-                printf("%f ", max_Q(i,j));
-           
-        }
-        printf("\n");
-    }
-   
-}*/
+
